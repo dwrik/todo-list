@@ -5,8 +5,99 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/reset.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+San&family=Nunito&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
         <title>Todo List</title>
     </head>
     <body>
+
+        <div class="sidebar">
+
+            <div class="sidebar-fixed-items">
+                <span class="material-icons">inbox</span>
+                <p>Inbox</p>
+            </div>
+
+            <div class="sidebar-fixed-items">
+                <span class="material-icons">today</span>
+                <p>Today</p>
+            </div>
+
+            <div class="sidebar-fixed-items">
+                <span class="material-icons">upcoming</span>
+                <p>Upcoming</p>
+            </div>
+
+            <div class="projects-heading">
+                Projects
+            </div>
+
+            <div class="project">
+                <span class="material-icons">checklist</span>
+                <p>Custom project</p>
+            </div>
+
+            <div class="project">
+                <span class="material-icons">checklist</span>
+                <p>CS project</p>
+            </div>
+
+        </div>
+
+        <div class="main-container">
+
+            <div class="header">
+                <h1 class="main-heading">
+                    Todos
+                </h1>
+            </div>
+
+            <div class="project-container">
+
+                <div class="project-name">Inbox</div>
+
+                <div class="project-list">
+
+                    <div class="todo">
+                        <span class="material-icons grey">radio_button_unchecked</span>
+                        <div class="todo-content">
+                            <label for="cb-1">Buy dog food</label>
+                            <div class="actions">
+                                <span class="material-icons-outlined md-20 darkgrey">edit</span>
+                                <span class="material-icons md-20 priority-high">flag</span>
+                                <span class="material-icons-outlined md-20 darkgrey">delete_outline</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="todo">
+                        <span class="material-icons grey">radio_button_unchecked</span>
+                        <div class="todo-content">
+                            <label for="cb-2">Buy groceries</label>
+                            <div class="actions">
+                                <span class="material-icons-outlined md-20 darkgrey">edit</span>
+                                <span class="material-icons md-20 priority-low">flag</span>
+                                <span class="material-icons-outlined md-20 darkgrey">delete_outline</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="todo">
+                        <span class="material-icons blue">check_circle</span>
+                        <div class="todo-content">
+                            <label for="cb-3">Buy food</label>
+                            <div class="actions">
+                                <span class="material-icons-outlined md-20 darkgrey">edit</span>
+                                <span class="material-icons md-20 priority-medium">flag</span>
+                                <span class="material-icons-outlined md-20 darkgrey">delete_outline</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     </body>
 </html>
