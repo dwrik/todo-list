@@ -17,6 +17,7 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .sidebar-fixed-items {
@@ -29,7 +30,7 @@
 }
 
 .sidebar-item-content {
-    padding: 10px;
+    padding: 20px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -48,6 +49,60 @@
     margin-right: 20px;
 }
 
+.sidebar-item.projects {
+    width: 100%;
+    height: 300px;
+    overflow: auto;
+}
+
+.project {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    padding: 10px;
+    margin-left: 60px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.project:hover {
+    background-color: rgba(181, 181, 181, 0.2);
+}
+
+.project .icon {
+    margin-right: 10px;
+}
+
+
+.footer {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:rgba(41, 41, 41, 0.5);
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: 'Lobster', sans-serif;
+}
+
+.signature {
+    margin-top: 10px;
+    font-size: 0.95em;
+}
+
+.signature a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.signature a:hover {
+    text-decoration: underline;
+}
+
 .main-container {
     display: flex;
     flex-direction: column;
@@ -56,24 +111,9 @@
     padding-left: 50px;
 }
 
-.header {
-    padding: 20px;
-}
-
-.main-heading {
-    font-size: 3em;
-    font-weight: medium;
-    font-family: 'Lobster', sans-serif;
-}
-
-.project-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
 .project-name {
     padding: 20px;
+    margin-top: 40px;
     font-size: 2em;
     font-weight: bold;
 }
@@ -118,6 +158,19 @@
     cursor: pointer;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background-color:rgba(41, 41, 41, 0.2);
+}
+
 .priority-low { color: dodgerblue; }
 .priority-medium { color: gold; }
 .priority-high { color: coral; }
@@ -132,9 +185,8 @@
 .material-icons-outlined.lightblue { color:#1a8be8; }
 .material-icons-outlined.darkgrey { color:rgba(41, 41, 41, 0.5); }
 
-
 .material-icons.md-20 { font-size: 20px; }
 .material-icons-outlined.md-20 { font-size: 20px; }
 
 .material-icons.md-24 { font-size: 24px; }
-.material-icons-outlined.md-20 { font-size: 24px; }
+.material-icons-outlined.md-24 { font-size: 24px; }
