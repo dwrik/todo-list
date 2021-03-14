@@ -1,1 +1,4 @@
-console.log(`hello there`);
+import { todoList, TodoElement } from './todo';
+import { renderList } from './dom';
+
+renderList(todoList, TodoElement);
