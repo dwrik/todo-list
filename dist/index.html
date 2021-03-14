@@ -52,88 +52,19 @@
 
             <div class="sidebar-variable-items">
                 <div class="sidebar-item projects">
-                    <div class="project">
+
+                    <div class="project" id="project-1">
                         <div class="project-content">
                             <span class="material-icons-outlined md-20 project-icon">checklist</span>
                             <p>Custom project</p>
                         </div>
                         <div class="remove-project">
-                            <span class="material-icons-outlined md-20 remove-icon">close</span>
+                            <span class="material-icons-outlined md-14 remove-icon">close</span>
                         </div>
                     </div>
-                    <div class="project">
-                        <div class="project-content">
-                            <span class="material-icons-outlined md-20 project-icon">checklist</span>
-                            <p>Custom project</p>
-                        </div>
-                        <div class="remove-project">
-                            <span class="material-icons-outlined md-20 remove-icon">close</span>
-                        </div>
-                    </div>
-                    <div class="project">
-                        <div class="project-content">
-                            <span class="material-icons-outlined md-20 project-icon">checklist</span>
-                            <p>Custom project</p>
-                        </div>
-                        <div class="remove-project">
-                            <span class="material-icons-outlined md-20 remove-icon">close</span>
-                        </div>
-                    </div>
-                    <div class="project">
-                        <div class="project-content">
-                            <span class="material-icons-outlined md-20 project-icon">checklist</span>
-                            <p>Custom project</p>
-                        </div>
-                        <div class="remove-project">
-                            <span class="material-icons-outlined md-20 remove-icon">close</span>
-                        </div>
-                    </div>
-                    <div class="project">
-                        <div class="project-content">
-                            <span class="material-icons-outlined md-20 project-icon">checklist</span>
-                            <p>Custom project</p>
-                        </div>
-                        <div class="remove-project">
-                            <span class="material-icons-outlined md-20 remove-icon">close</span>
-                        </div>
-                    </div>
-                    <div class="project">
-                        <div class="project-content">
-                            <span class="material-icons-outlined md-20 project-icon">checklist</span>
-                            <p>Custom project</p>
-                        </div>
-                        <div class="remove-project">
-                            <span class="material-icons-outlined md-20 remove-icon">close</span>
-                        </div>
-                    </div>
-                    <div class="project">
-                        <div class="project-content">
-                            <span class="material-icons-outlined md-20 project-icon">checklist</span>
-                            <p>Custom project</p>
-                        </div>
-                        <div class="remove-project">
-                            <span class="material-icons-outlined md-20 remove-icon">close</span>
-                        </div>
-                    </div>
-                    <div class="project">
-                        <div class="project-content">
-                            <span class="material-icons-outlined md-20 project-icon">checklist</span>
-                            <p>Custom project</p>
-                        </div>
-                        <div class="remove-project">
-                            <span class="material-icons-outlined md-20 remove-icon">close</span>
-                        </div>
-                    </div>
-                    <div class="project">
-                        <div class="project-content">
-                            <span class="material-icons-outlined md-20 project-icon">checklist</span>
-                            <p>Custom project</p>
-                        </div>
-                        <div class="remove-project">
-                            <span class="material-icons-outlined md-20 remove-icon">close</span>
-                        </div>
-                    </div>
+
                 </div>
+
                 <div class="footer">
                     <h1 class="logo">
                         To-Do
@@ -143,11 +74,9 @@
                     </p>
                 </div>
             </div>
-
         </div>
 
         <div class="main-container">
-            
             <div class="project-name">Inbox<span class="material-icons-outlined md-20" id="menu-button">menu</span></div>
             <div class="project-todos">
             </div>
@@ -155,6 +84,29 @@
 
         <div class="add-button">
             <span class="material-icons-outlined md-20">add</span>
+        </div>
+
+        <div class="modal">
+            <div class="modal-body">
+                <div class="modal-heading">Add Todo</div>
+                <input class="modal-input" type="text" id="title" placeholder="Title">
+                <textarea class="modal-input" id="description" rows="4" wrap="hard" placeholder="Description"></textarea>
+                <div id="date">
+                    <input type="number" min="1" max="31" id="day"   placeholder="Day">
+                    <input type="number" min="1" max="12" id="month" placeholder="Month">
+                    <input type="number" min="2021" max="2100" id="year"  placeholder="Year">
+                </div>
+                <select class="modal-input"  id="priority">
+                    <option value="" selected disabled hidden>Priority</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <div class="modal-buttons">
+                    <button class="buttons" id="modal-confirm" type="submit">SAVE</button>
+                    <button class="buttons" id="modal-cancel">CANCEL</button>
+                </div>
+            </div>
         </div>
 
         <script src="main.js"></script>
