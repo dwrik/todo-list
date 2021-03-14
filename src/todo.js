@@ -108,8 +108,6 @@ const TodoElement = (todoObject, index) => {
     deleteIcon.addEventListener('click', (event) => {
         todoList.splice(index, 1);
         renderList(todoList);
-        // const nodeToRemove = event.target.closest('.todo-container');
-        // nodeToRemove.parentElement.removeChild(nodeToRemove);
     });
 
     actions.appendChild(editIcon);
