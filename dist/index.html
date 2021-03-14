@@ -11,11 +11,8 @@
         <title>Todo List</title>
     </head>
     <body>
-
         <div class="sidebar">
-
             <div class="sidebar-fixed-items">
-
                 <div class="sidebar-item">
                     <div class="sidebar-item-content">
                         <div class="icon">
@@ -24,7 +21,6 @@
                         <p>Inbox</p>
                     </div>
                 </div>
-
                 <div class="sidebar-item">
                     <div class="sidebar-item-content">
                         <div class="icon">
@@ -33,7 +29,6 @@
                         <p>Today</p>
                     </div>
                 </div>
-
                 <div class="sidebar-item">
                     <div class="sidebar-item-content">
                         <div class="icon">
@@ -42,7 +37,6 @@
                         <p>Upcoming</p>
                     </div>
                 </div>
-
                 <div class="sidebar-item md-24">
                     <div class="sidebar-item-content">
                         <div class="icon">
@@ -51,74 +45,52 @@
                         <p>Projects</p>
                     </div>
                 </div>
-
             </div>
 
-            <!-- <div class="project">
-                <span class="material-icons-outlined md-24">checklist</span>
-                <p>Custom project</p>
+            <div class="sidebar-item projects">
+                <div class="project">
+                    <div class="project-content">
+                        <span class="material-icons-outlined md-20 project-icon">checklist</span>
+                        <p>Custom project</p>
+                    </div>
+                    <div class="remove-project">
+                        <span class="material-icons-outlined md-20 remove-icon">close</span>
+                    </div>
+                </div>
+                <div class="project">
+                    <div class="project-content">
+                        <span class="material-icons-outlined md-20 project-icon">checklist</span>
+                        <p>Custom project</p>
+                    </div>
+                    <div class="remove-project">
+                        <span class="material-icons-outlined md-20 remove-icon">close</span>
+                    </div>
+                </div>
+                <div class="project">
+                    <div class="project-content">
+                        <span class="material-icons-outlined md-20 project-icon">checklist</span>
+                        <p>Custom project</p>
+                    </div>
+                    <div class="remove-project">
+                        <span class="material-icons-outlined md-20 remove-icon">close</span>
+                    </div>
+                </div>
             </div>
-
-            <div class="project">
-                <span class="material-icons md-24">checklist</span>
-                <p>CS project</p>
-            </div> -->
-
+            <div class="footer">
+                <h1 class="logo">
+                    To-Do
+                </h1>
+                <p class="signature">
+                    Copyright &copy 2021 <a href="https://github.com/dwrik" target="_blank">dwrik</a>
+                </p>
+            </div>
         </div>
 
         <div class="main-container">
-
-            <div class="header">
-                <h1 class="main-heading">
-                    Todos
-                </h1>
+            <div class="project-name">Inbox</div>
+            <div class="project-todos">
             </div>
-
-            <div class="project-container">
-
-                <div class="project-name">Inbox</div>
-
-                <div class="project-list">
-
-                    <div class="todo">
-                        <span class="material-icons grey">radio_button_unchecked</span>
-                        <div class="todo-content">
-                            <label for="cb-1">Buy dog food</label>
-                            <div class="actions">
-                                <span class="material-icons-outlined md-20 darkgrey">edit</span>
-                                <span class="material-icons md-20 priority-high">flag</span>
-                                <span class="material-icons-outlined md-20 darkgrey">delete_outline</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="todo">
-                        <span class="material-icons grey">radio_button_unchecked</span>
-                        <div class="todo-content">
-                            <label for="cb-2">Buy groceries</label>
-                            <div class="actions">
-                                <span class="material-icons-outlined md-20 darkgrey">edit</span>
-                                <span class="material-icons md-20 priority-low">flag</span>
-                                <span class="material-icons-outlined md-20 darkgrey">delete_outline</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="todo">
-                        <span class="material-icons blue">check_circle</span>
-                        <div class="todo-content">
-                            <label for="cb-3">Buy food</label>
-                            <div class="actions">
-                                <span class="material-icons-outlined md-20 darkgrey">edit</span>
-                                <span class="material-icons md-20 priority-medium">flag</span>
-                                <span class="material-icons-outlined md-20 darkgrey">delete_outline</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
+        <script src="main.js"></script>
     </body>
 </html>
