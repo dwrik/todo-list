@@ -1,8 +1,9 @@
 import { todoList, TodoElement } from './todo';
 
-const projectTodos = document.querySelector('.project-todos');
 
 const renderList = () => {
+
+    const projectTodos = document.querySelector('.project-todos');
 
     const removeExistingList = () => {
         const todos = [ ...document.querySelectorAll('.todo-container') ];
@@ -42,4 +43,14 @@ const toggleProjects = () => {
     }
 }
 
-export { renderList, openMenu, closeMenu, toggleProjects };
+const hideModal = (event) => {
+    const modal = document.querySelector('.modal');
+    modal.style.display = 'none';
+};
+
+const showModal = (event) => {
+    const modal = document.querySelector('.modal');
+    modal.style.display = 'flex';
+};
+
+export { renderList, openMenu, closeMenu, toggleProjects, hideModal, showModal };
