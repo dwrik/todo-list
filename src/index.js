@@ -1,13 +1,25 @@
-import { todoList, TodoElement } from './todo';
-import { renderList, openMenu, closeMenu, toggleProjects } from './dom';
+import * as dom from './dom';
 
-renderList();
+dom.renderList();
 
 const projectsTab = document.querySelector('#projects-tab');
-projectsTab.addEventListener('click', toggleProjects);
+projectsTab.addEventListener('click', dom.toggleProjects);
 
 const menuButton = document.querySelector('#menu-button');
-menuButton.addEventListener('click', openMenu);
+menuButton.addEventListener('click', dom.openMenu);
 
-const closeButton = document.querySelector('#close-button');
-closeButton.addEventListener('click', closeMenu);
+const closeMenu = document.querySelector('#close-button');
+closeMenu.addEventListener('click', dom.closeMenu);
+
+const closeModal = document.querySelector('#modal-cancel');
+closeModal.addEventListener('click', dom.hideModal);
+
+const addButton = document.querySelector('.add-button');
+addButton.addEventListener('click', dom.showModal);
+
+const modal = document.querySelector('.modal');
+window.addEventListener('click', (event) => {
+    if (event.target == modal) {
+        dom.hideModal(event);
+    }
+});
