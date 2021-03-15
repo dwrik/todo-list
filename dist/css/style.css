@@ -249,12 +249,16 @@
 .modal-input {
     padding: 10px;
     margin: 10px 0px;
-    border: 2px solid darkgrey;
+    border: 1px solid darkgrey;
     font-family: 'Open Sans', sans-serif;
     border-radius: 10px;
     font-size: 1em;
     width: 100%;
 }
+
+.required-field { border-color: #f02849; }
+.required-field-text { display: none; font-size: 1em; color: #f02849; margin-left: 5px; }
+.required-show { display: block; }
 
 .modal-input:focus { outline: none; }
 
@@ -269,7 +273,7 @@
 
 #date input {
     height: 100%;
-    border: 2px solid darkgrey;
+    border: 1px solid darkgrey;
     border-radius: 10px;
     font-size: 1em;
     padding: 10px;
