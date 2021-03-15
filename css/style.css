@@ -47,8 +47,13 @@
     transition: max-height 200ms ease-out;
 }
 
+#projects-tab { position: relative; }
+#expand-projects { transition: transform 300ms; position: absolute; right: 10px; }
+.rotate { transform: rotate(180deg); }
+
 .project {
     display: flex;
+    margin-left: 10px;
     font-size: 1.1em;
     padding: 15px 20px;
     border-radius: 5px;
@@ -332,6 +337,7 @@
     .signature { margin-top: 2px; font-size: 0.65em; }
     .sidebar-item-content { font-size: 1em; padding: 15px 10px; }
     .logo { font-size: 1.1em; }
+    #expand-projects { font-size: 20px; }
 }
 @media (max-width: 750px) {
     .close-sidebar { display: flex; }
