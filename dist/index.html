@@ -8,6 +8,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+San&family=Nunito&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
         <title>Todo List</title>
     </head>
     <body>
@@ -54,7 +55,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="sidebar-variable-items">
                 <div class="sidebar-item projects">
 
@@ -69,7 +69,6 @@
                     </div>
 
                 </div>
-
                 <div class="footer">
                     <h1 class="logo">
                         To-Do
@@ -80,39 +79,34 @@
                 </div>
             </div>
         </div>
-
         <div class="main-container">
             <div class="project-name">
                 Inbox<span class="material-icons-outlined md-20" id="menu-button">menu</span>
             </div>
             <div class="project-todos"></div>
         </div>
-
         <div class="add-button">
             <span class="material-icons-outlined md-20">add</span>
         </div>
-
         <div class="modal">
             <div class="modal-body">
                 <div class="modal-heading">Add Todo</div>
-                <!-- User Inputs -->
-                <input class="modal-input" type="text" id="title" placeholder="Title">
-                <div class="required-field-text">This is a required field</div>
-                <textarea class="modal-input" id="description" rows="6" wrap="hard" placeholder="Description"></textarea>
-                <div id="date">
-                    <input type="number" min="1" max="31" id="day"   placeholder="Day">
-                    <input type="number" min="1" max="12" id="month" placeholder="Month">
-                    <input type="number" min="2021" max="2100" id="year"  placeholder="Year">
-                </div>
-                <select class="modal-input"  id="priority">
-                    <option value="" selected disabled hidden>Priority</option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
-                <!-- Buttons -->
+                <!-- FORM -->
+                <form id="todo-form">
+                    <input class="modal-input" type="text" name="title" placeholder="Title" required>
+                    <div class="required-field-text">This is a required field</div>
+                    <textarea class="modal-input" name="description" rows="6" wrap="hard" placeholder="Description"></textarea>
+                    <input type="text" name="date" class="flatpickr modal-input" placeholder="Due Date">
+                    <select class="modal-input"  name="priority" required>
+                        <option value="" selected disabled hidden>Priority</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </form>
+                <!-- BUTTONS -->
                 <div class="modal-buttons">
-                    <button class="buttons" id="modal-confirm" type="submit">SAVE</button>
+                    <button class="buttons" id="modal-confirm" type="submit" form="todo-form">SAVE</button>
                     <button class="buttons" id="modal-cancel">CANCEL</button>
                 </div>
             </div>
