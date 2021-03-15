@@ -256,32 +256,9 @@
     width: 100%;
 }
 
-.required-field { border-color: #f02849; }
-.required-field-text { display: none; font-size: 1em; color: #f02849; margin-left: 5px; }
-.required-show { display: block; }
-
 .modal-input:focus { outline: none; }
 
 .modal-input#description { resize: none; }
-
-#date {
-    display: flex;
-    font-family: 'Open Sans', sans-serif;
-    margin: 10px 0px;
-    gap: 10px;
-}
-
-#date input {
-    height: 100%;
-    border: 1px solid darkgrey;
-    border-radius: 10px;
-    font-size: 1em;
-    padding: 10px;
-    flex-grow: 1;
-    width: 30%;
-}
-
-#date input:focus { outline: none; }
 
 .modal-buttons { display: flex; justify-content: flex-end; }
 
