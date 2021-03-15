@@ -54,6 +54,9 @@ export const hideModal = () => {
 
     const datePicker = document.querySelector('.flatpickr.modal-input')._flatpickr;
     datePicker.clear();
+    
+    const modalHeading = document.querySelector('.modal-heading');
+    modalHeading.innerHTML = 'Add Todo';
 };
 
 
@@ -135,6 +138,9 @@ export const getTodoElement = (todoList, todoObject) => {
     // edit todo
     editIcon.addEventListener('click', (event) => {
         showModal();
+
+        const modalHeading = document.querySelector('.modal-heading');
+        modalHeading.innerHTML = 'Edit Todo';
 
         const operation = document.querySelector('#operation');
         operation.value = 'update';
