@@ -1,25 +1,55 @@
 import * as dom from './dom';
+import * as todo from './todo';
+import flatpickr from 'flatpickr';
+import { isAfter, isToday } from 'date-fns'
 
-dom.renderList();
+// initialize custom datepicker
+flatpickr('.flatpickr', {
+    altInput: true,
+    altFormat: 'F j, Y',
+    dateFormat: 'Y-m-d',
+    enable: [
+        (date) => isToday(date) || isAfter(date, new Date())
+    ],
+});
 
+// initial rendering of list
+dom.renderList(todo.todoList);
+
+// toggle project menu
 const projectsTab = document.querySelector('#projects-tab');
 projectsTab.addEventListener('click', dom.toggleProjects);
 
+// open sidebar
 const menuButton = document.querySelector('#menu-button');
 menuButton.addEventListener('click', dom.openMenu);
 
+// close sidebar
 const closeMenu = document.querySelector('#close-button');
 closeMenu.addEventListener('click', dom.closeMenu);
 
-const closeModal = document.querySelector('#modal-cancel');
-closeModal.addEventListener('click', dom.hideModal);
-
+// add todo form
 const addButton = document.querySelector('.add-button');
 addButton.addEventListener('click', dom.showModal);
 
+// cancel add todo
+const closeModal = document.querySelector('#modal-cancel');
+closeModal.addEventListener('click', dom.hideModal);
+
+// submit add todo form
+const todoForm = document.querySelector('#todo-form');
+todoForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(todoForm);
+    todo.addTodo(formData);
+    dom.renderList(todo.todoList);
+    dom.hideModal();
+});
+
+// hide modal on click
 const modal = document.querySelector('.modal');
 window.addEventListener('click', (event) => {
     if (event.target == modal) {
-        dom.hideModal(event);
+        dom.hideModal();
     }
 });
