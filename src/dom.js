@@ -1,7 +1,4 @@
-import { todoList } from './todo';
-
-
-export const renderList = () => {
+export const renderList = (todoList) => {
     const projectTodos = document.querySelector('.project-todos');
 
     const removeExistingList = () => {
@@ -48,11 +45,60 @@ export const toggleProjects = () => {
 export const hideModal = (event) => {
     const modal = document.querySelector('.modal');
     modal.style.display = 'none';
+
+    // private helper
+    const clearUserInputs = () => {
+        document.querySelector('#title').value = '';
+        document.querySelector('#description').value = '';
+        document.querySelector('#priority').value = '';
+        document.querySelector('#day').value = '';
+        document.querySelector('#month').value = '';
+        document.querySelector('#year').value = '';
+    };
+
+    requiredText('remove');
+    clearUserInputs();
 };
+
 
 export const showModal = (event) => {
     const modal = document.querySelector('.modal');
     modal.style.display = 'flex';
+};
+
+export const getUserInput = () => {
+    const title = document.querySelector('#title').value;
+    const description = document.querySelector('#description').value;
+    const priority = document.querySelector('#priority').value;
+
+    const day = document.querySelector('#day').value;
+    const month = document.querySelector('#month').value;
+    const year = document.querySelector('#year').value;
+    const date = `${day}-${month}-${year}`;
+
+    return {
+        title,
+        description,
+        date,
+        priority
+    };
+};
+
+export const requiredText = (operation) => {
+    const requiredDiv = document.querySelector('.required-field-text');
+    const requiredField = requiredDiv.previousElementSibling;
+
+    switch(operation) {
+        case 'add':
+            requiredDiv.classList.add('required-show');
+            requiredField.classList.add('required-field')
+            break;
+
+        case 'remove':
+            requiredDiv.classList.remove('required-show');
+            requiredField.classList.remove('required-field')
+            break;
+    }
 };
 
 export const getTodoElement = (todoObject, index) => {
