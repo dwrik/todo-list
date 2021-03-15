@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { changePriority, deleteTodo } from './todo';
 
 export const renderList = (todoList) => {
     const projectTodos = document.querySelector('.project-todos');
@@ -11,7 +12,7 @@ export const renderList = (todoList) => {
     removeExistingList();
 
     for (let index in todoList) {
-        const todoElement = getTodoElement(todoList, todoList[index], index);
+        const todoElement = getTodoElement(todoList, todoList[index]);
         projectTodos.appendChild(todoElement);
     }
 
@@ -61,23 +62,20 @@ export const showModal = () => {
     modal.style.display = 'flex';
 };
 
-export const getTodoElement = (todoList, todoObject, index) => {
+export const getTodoElement = (todoList, todoObject) => {
 
     // todo container : todo + todo details
-
     const todoContainer = document.createElement('div');
     todoContainer.classList.add('todo-container');
 
     // todo : icon + todo content
-
     const todo = document.createElement('div');
     todo.classList.add('todo');
-    todo.id = `todo-${index}`;
 
     const checkbox = document.createElement('span');
     checkbox.classList.add('material-icons', 'grey');
     checkbox.innerHTML = 'radio_button_unchecked';
-    checkbox.id = `checkbox-${index}`;
+    checkbox.id = `checkbox-${todoObject.id}`;
 
     checkbox.addEventListener('click', (event) => {
         checkbox.classList.toggle('grey');
@@ -94,7 +92,7 @@ export const getTodoElement = (todoList, todoObject, index) => {
     todoContent.classList.add('todo-content');
 
     const toggleDetails = (event) => {
-        const todoDetails = document.querySelector(`#todoDetails-${index}`);
+        const todoDetails = document.querySelectorAll('.todo-details')[todoObject.id];
         const todo = todoDetails.previousSibling;
 
         todo.classList.toggle('border-hide');
@@ -112,7 +110,7 @@ export const getTodoElement = (todoList, todoObject, index) => {
     todoBody.addEventListener('click', toggleDetails);
 
     const title = document.createElement('label');
-    title.htmlFor = `checkbox-${index}`;
+    title.htmlFor = `checkbox-${todoObject.id}`;
     title.innerHTML = todoObject.title;
 
     todoBody.appendChild(title);
@@ -133,20 +131,53 @@ export const getTodoElement = (todoList, todoObject, index) => {
     const editIcon = document.createElement('span');
     editIcon.classList.add('material-icons-outlined', 'md-20', 'darkgrey');
     editIcon.innerHTML = 'edit';
-    editIcon.id = `edit-${index}`;
+
+    // edit todo
+    editIcon.addEventListener('click', (event) => {
+        showModal();
+
+        const operation = document.querySelector('#operation');
+        operation.value = 'update';
+
+        const id = document.querySelector('input[name="id"]');
+        id.value = todoObject.id;
+
+        const title= document.querySelector('.modal-input[name="title"]');
+        title.value = todoObject.title;
+
+        const description= document.querySelector('.modal-input[name="description"]');
+        description.value = todoObject.description;
+
+        const date = document.querySelector('.flatpickr.modal-input')._flatpickr;
+        date.setDate(todoObject.dueDate);
+
+        const priority = document.querySelector('.modal-input[name="priority"]');
+        priority.value = todoObject.priority;
+    });
 
     const flagIcon = document.createElement('span');
     flagIcon.classList.add('material-icons', 'md-20', `priority-${todoObject.priority}`);
     flagIcon.innerHTML = 'flag';
-    flagIcon.id = `flag-${index}`;
+
+    // toggle priority, low -> med -> high
+    flagIcon.addEventListener('click', (event) => {
+        flagIcon.classList.remove(`priority-${todoObject.priority}`)
+        switch (todoObject.priority) {
+            case 'low':    changePriority(todoObject.id, 'medium'); break;
+            case 'medium': changePriority(todoObject.id, 'high');   break;
+            case 'high':   changePriority(todoObject.id, 'low');    break;
+        }
+        flagIcon.classList.add(`priority-${todoObject.priority}`)
+        console.log(todoList);
+    });
 
     const deleteIcon = document.createElement('span');
     deleteIcon.classList.add('material-icons-outlined', 'md-20', 'darkgrey');
     deleteIcon.innerHTML = 'delete';
-    deleteIcon.id = `delete-${index}`;
 
+    // delete todo
     deleteIcon.addEventListener('click', (event) => {
-        todoList.splice(index, 1);
+        deleteTodo(todoObject.id);
         renderList(todoList);
     });
 
@@ -161,10 +192,8 @@ export const getTodoElement = (todoList, todoObject, index) => {
     todo.appendChild(todoContent);
 
     // todo details
-
     const todoDetails = document.createElement('div');
     todoDetails.classList.add('todo-details');
-    todoDetails.id = `todoDetails-${index}`
 
     todoDetails.addEventListener('click', toggleDetails);
 
