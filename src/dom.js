@@ -1,4 +1,4 @@
-import flatpickr from 'flatpickr';
+import { format } from 'date-fns';
 
 export const renderList = (todoList) => {
     const projectTodos = document.querySelector('.project-todos');
@@ -11,7 +11,7 @@ export const renderList = (todoList) => {
     removeExistingList();
 
     for (let index in todoList) {
-        const todoElement = getTodoElement(todoList[index], index);
+        const todoElement = getTodoElement(todoList, todoList[index], index);
         projectTodos.appendChild(todoElement);
     }
 
@@ -45,24 +45,23 @@ export const toggleProjects = () => {
 }
 
 export const hideModal = () => {
-    const todoForm = document.querySelector('#todo-form');
     const modal = document.querySelector('.modal');
     modal.style.display = 'none';
+
+    const todoForm = document.querySelector('#todo-form');
     todoForm.reset();
+
+    const datePicker = document.querySelector('.flatpickr.modal-input')._flatpickr;
+    datePicker.clear();
 };
 
 
 export const showModal = () => {
     const modal = document.querySelector('.modal');
     modal.style.display = 'flex';
-    flatpickr('.flatpickr', {
-        altInput: true,
-        altFormat: 'F j, Y',
-        dateFormat: 'Y-m-d',
-    });
 };
 
-export const getTodoElement = (todoObject, index) => {
+export const getTodoElement = (todoList, todoObject, index) => {
 
     // todo container : todo + todo details
 
@@ -96,8 +95,6 @@ export const getTodoElement = (todoObject, index) => {
 
     const toggleDetails = (event) => {
         const todoDetails = document.querySelector(`#todoDetails-${index}`);
-        if (todoDetails === null) return;
-
         const todo = todoDetails.previousSibling;
 
         todo.classList.toggle('border-hide');
@@ -123,8 +120,10 @@ export const getTodoElement = (todoObject, index) => {
     if (todoObject.dueDate) {
         const dueDate = document.createElement('p');
         dueDate.classList.add('duedate');
-        const date = todoObject.dueDate.split(' ');
-        dueDate.innerHTML = date[0] + ' ' + date[1];
+
+        const date = format(new Date(todoObject.dueDate), 'dd MMM');
+        dueDate.innerHTML = date;
+
         todoBody.appendChild(dueDate);
     }
 
@@ -188,10 +187,14 @@ export const getTodoElement = (todoObject, index) => {
     dateHeading.innerHTML = 'Due Date: ';
 
     date.appendChild(dateHeading);
-    dateHeading.after(`${todoObject.dueDate ?? 'N/A'}`);
+
+    const dueDate = (todoObject.dueDate)?
+            format(new Date(todoObject.dueDate), 'dd.MM.yyyy')
+            : 'N/A';
+    dateHeading.after(dueDate);
 
     const priority = document.createElement('div');
-    date.classList.add('priority');
+    priority.classList.add('priority');
 
     const priorityHeading = document.createElement('span');
     priorityHeading.classList.add('priority-heading');
