@@ -41,7 +41,13 @@ const todoForm = document.querySelector('#todo-form');
 todoForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const formData = new FormData(todoForm);
-    todo.addTodo(formData);
+    const operation = document.querySelector('#operation').value;
+
+    switch (operation) {
+        case 'add':    todo.addTodo(formData); break;
+        case 'update': todo.updateTodo(formData); break;
+    }
+
     dom.renderList(todo.todoList);
     dom.hideModal();
 });
