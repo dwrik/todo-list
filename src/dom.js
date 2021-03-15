@@ -31,13 +31,16 @@ const closeMenu = () => {
 
 const toggleProjects = () => {
     const sidebarVariableItems = document.querySelector('.sidebar-variable-items');
+    const expandProjects = document.querySelector('#expand-projects');
     const projects = document.querySelector('.projects');
     const footer = document.querySelector('.footer');
 
     if (projects.style.maxHeight) {
+        expandProjects.classList.remove('rotate');
         projects.style.overflow = 'hidden';
         projects.style.maxHeight = null;
     } else {
+        expandProjects.classList.add('rotate');
         projects.style.overflow = 'auto';
         projects.style.maxHeight = `calc(${sidebarVariableItems.scrollHeight}px - ${footer.scrollHeight}px)`;
     }
