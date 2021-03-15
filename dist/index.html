@@ -93,6 +93,8 @@
                 <div class="modal-heading">Add Todo</div>
                 <!-- FORM -->
                 <form id="todo-form">
+                    <input type="hidden" id="operation" value="add">
+                    <input type="hidden" name="id" value="">
                     <input class="modal-input" type="text" name="title" placeholder="Title" required>
                     <textarea class="modal-input" name="description" rows="6" wrap="hard" placeholder="Description"></textarea>
                     <input type="text" name="date" class="flatpickr modal-input" placeholder="Due Date">
