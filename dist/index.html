@@ -93,16 +93,16 @@
                 <div class="modal-heading">Add Todo</div>
                 <!-- FORM -->
                 <form id="todo-form">
-                    <input type="hidden" id="operation" value="add">
                     <input type="hidden" name="id" value="">
-                    <input class="modal-input" type="text" name="title" placeholder="Title" required>
-                    <textarea class="modal-input" name="description" rows="6" wrap="hard" placeholder="Description"></textarea>
-                    <input type="text" name="date" class="flatpickr modal-input" placeholder="Due Date">
-                    <select class="modal-input"  name="priority" required>
+                    <input type="hidden" id="operation" value="add">
+                    <input type="text" name="title" placeholder="Title" class="modal-input" required>
+                    <textarea name="description" rows="6" wrap="hard" placeholder="Description" class="modal-input"></textarea>
+                    <input type="text" name="date" placeholder="Due Date" class="flatpickr modal-input">
+                    <select name="priority" class="modal-input" required>
                         <option value="" selected disabled hidden>Priority</option>
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
-                        <option value="high">High</option>
+                        <option value="high"> High</option>
                     </select>
                 </form>
                 <!-- BUTTONS -->
