@@ -1,4 +1,3 @@
-// Todo factory
 const Todo = (id, title, description, dueDate, priority, isChecked) => {
     return {
         id,
@@ -10,41 +9,49 @@ const Todo = (id, title, description, dueDate, priority, isChecked) => {
     };
 };
 
+let nextValidId = 3;
+
 export const todoList = [];
 
 const lorem = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta veniam facere nisi voluptatibus cumque fugiat. Repudiandae itaque at adipisci aspernatur et veritatis blanditiis a, quia suscipit recusandae non, aut ad!';
 
-todoList.push(Todo(0, 'Dog food', lorem, null, 'high', false));
+todoList.push(Todo(0, 'Dog food', lorem, '2021.03.15', 'high', false));
 todoList.push(Todo(1, 'Buy whiteboard and accessories', 'Preferrably 3x4 and markers', '2021.03.28', 'low', false));
-todoList.push(Todo(2, 'Get groceries', lorem, '2021.04.15', 'medium', true));
+todoList.push(Todo(2, 'Get groceries', lorem, '2021.03.16', 'medium', true));
 
 export const addTodo = (formData) => {
     const todo = parseFormData(formData);
     todoList.push(todo);
-    updateIds();
     console.log(todoList);
 };
 
 export const updateTodo = (formData) => {
     const todo = parseFormData(formData);
-    todo.isChecked = todoList[todo.id].isChecked;
-    todoList[todo.id] = todo;
+    const index = getTodoIndex(todo.id);
+    todo.isChecked = todoList[index].isChecked;
+    todoList[index] = todo;
 }
 
 export const deleteTodo = (id) => {
-    todoList.splice(id, 1);
-    updateIds();
+    todoList.splice(getTodoIndex(id), 1);
     console.log(todoList);
 }
 
-export const changePriority = (id, priority) => {
-    todoList[id].priority = priority;
+// toggle priority, low -> med -> high
+export const changePriority = (id) => {
+    const index = getTodoIndex(id);
+    const currPriority = todoList[index].priority;
+    switch (currPriority) {
+        case 'low':    todoList[index].priority = 'medium'; break;
+        case 'medium': todoList[index].priority = 'high';   break;
+        case 'high':   todoList[index].priority = 'low';    break;
+    }
 };
 
-const updateIds = () => {
-    for (let index in todoList) {
-        todoList[index].id = index;
-    }
+// private helpers
+
+const getTodoIndex = (id) => {
+    return todoList.findIndex(todo => todo.id == id);
 };
 
 const parseFormData = (formData) => {
@@ -52,7 +59,7 @@ const parseFormData = (formData) => {
     const priority = formData.get('priority');
     const description = formData.get('description');
     const date = (formData.get('date'))? formData.get('date') : null;
-    const id = (formData.get('id'))? formData.get('id') : todoList.length;
+    const id = (formData.get('id'))? formData.get('id') : nextValidId++;
     return Todo(
             id,
             title,
