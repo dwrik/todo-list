@@ -18,7 +18,7 @@
                     <div class="close-sidebar">
                         <span class="material-icons-outlined md-24 darkgrey" id="close-button">close</span>
                     </div>
-                    <div class="sidebar-item-content">
+                    <div class="sidebar-item-content" id="inbox-tab">
                         <div class="icon">
                             <span class="material-icons-outlined md-24 lightblue">inbox</span>
                         </div>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="sidebar-item">
-                    <div class="sidebar-item-content">
+                    <div class="sidebar-item-content" id="today-tab">
                         <div class="icon">
                             <span class="material-icons-outlined md-24 green">today</span>
                         </div>
@@ -34,21 +34,19 @@
                     </div>
                 </div>
                 <div class="sidebar-item">
-                    <div class="sidebar-item-content">
+                    <div class="sidebar-item-content" id="upcoming-tab">
                         <div class="icon">
                             <span class="material-icons-outlined md-24 yellow">upcoming</span>
                         </div>
                         <p>Upcoming</p>
                     </div>
                 </div>
-                <div class="sidebar-item md-24">
+                <div class="sidebar-item">
                     <div class="sidebar-item-content" id="projects-tab">
                         <div class="icon">
                             <span class="material-icons-outlined red">fact_check</span>
                         </div>
-                        <p>
-                            Projects
-                        </p>
+                        <p>Projects</p>
                         <span class="material-icons-outlined md-24 darkgrey" id="expand-projects">
                             expand_more
                         </span>
@@ -80,8 +78,9 @@
             </div>
         </div>
         <div class="main-container">
-            <div class="project-name">
-                Inbox<span class="material-icons-outlined md-20" id="menu-button">menu</span>
+            <div class="project-header">
+                <div class="project-name">Inbox</div>
+                <div><span class="material-icons-outlined md-20" id="menu-button">menu</span></div>
             </div>
             <div class="project-todos"></div>
         </div>
