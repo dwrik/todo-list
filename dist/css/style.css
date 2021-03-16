@@ -17,7 +17,7 @@
     transition: all 200ms ease-out;
 }
 
-.close-sidebar { display: flex; justify-content: flex-end; display: none; }
+.close-sidebar { justify-content: flex-end; display: none; }
 
 .sidebar-item { padding: 0px 20px; }
 
@@ -100,14 +100,17 @@
     padding-left: 50px;
 }
 
-.project-name {
+.project-header {
     padding: 20px;
     margin-top: 40px;
-    font-size: 2em;
-    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.project-name {
+    font-size: 2em;
+    font-weight: bold;
 }
 .project-todos {
     padding: 20px;
