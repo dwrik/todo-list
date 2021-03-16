@@ -14,7 +14,25 @@ flatpickr('.flatpickr', {
 });
 
 // initial rendering of list
-dom.renderList(todo.todoList);
+dom.renderList(dom.tab.INBOX, todo.todoList);
+
+// inbox tab
+const inboxTab = document.querySelector('#inbox-tab');
+inboxTab.addEventListener('click', (event) => {
+    dom.showTab(dom.tab.INBOX, todo.todoList)
+});
+
+// today tab
+const todayTab = document.querySelector('#today-tab');
+todayTab.addEventListener('click', (event) => {
+    dom.showTab(dom.tab.TODAY, todo.todoList)
+});
+
+// upcoming tab
+const upcomingTab = document.querySelector('#upcoming-tab');
+upcomingTab.addEventListener('click', (event) => {
+    dom.showTab(dom.tab.UPCOMING, todo.todoList);
+});
 
 // toggle project menu
 const projectsTab = document.querySelector('#projects-tab');
@@ -48,7 +66,7 @@ todoForm.addEventListener('submit', (event) => {
         case 'update': todo.updateTodo(formData); break;
     }
 
-    dom.renderList(todo.todoList);
+    dom.renderList(dom.tab.CURRENT, todo.todoList);
     dom.hideModal();
 });
 
