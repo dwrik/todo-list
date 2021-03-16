@@ -1,11 +1,12 @@
 // Todo factory
-const Todo = (id, title, description, dueDate, priority) => {
+const Todo = (id, title, description, dueDate, priority, isChecked) => {
     return {
         id,
         title,
         description,
         dueDate,
-        priority
+        priority,
+        isChecked,
     };
 };
 
@@ -13,9 +14,9 @@ export const todoList = [];
 
 const lorem = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta veniam facere nisi voluptatibus cumque fugiat. Repudiandae itaque at adipisci aspernatur et veritatis blanditiis a, quia suscipit recusandae non, aut ad!';
 
-todoList.push(Todo(0, 'Dog food', lorem, null, 'high'));
-todoList.push(Todo(1, 'Buy whiteboard and accessories', 'Preferrably 3x4 and markers', '2021.03.28', 'low'));
-todoList.push(Todo(2, 'Get groceries', lorem, '2021.04.15', 'medium'));
+todoList.push(Todo(0, 'Dog food', lorem, null, 'high', false));
+todoList.push(Todo(1, 'Buy whiteboard and accessories', 'Preferrably 3x4 and markers', '2021.03.28', 'low', false));
+todoList.push(Todo(2, 'Get groceries', lorem, '2021.04.15', 'medium', true));
 
 export const addTodo = (formData) => {
     const todo = parseFormData(formData);
@@ -26,6 +27,7 @@ export const addTodo = (formData) => {
 
 export const updateTodo = (formData) => {
     const todo = parseFormData(formData);
+    todo.isChecked = todoList[todo.id].isChecked;
     todoList[todo.id] = todo;
 }
 
@@ -56,6 +58,7 @@ const parseFormData = (formData) => {
             title,
             description,
             date,
-            priority
+            priority,
+            false,
         );
 }
