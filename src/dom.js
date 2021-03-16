@@ -49,6 +49,12 @@ export const hideModal = () => {
     const modal = document.querySelector('.modal');
     modal.style.display = 'none';
 
+    const id = document.querySelector('input[name="id"]');
+    id.value = '';
+
+    const operation = document.querySelector('#operation');
+    operation.value = 'add';
+
     const todoForm = document.querySelector('#todo-form');
     todoForm.reset();
 
@@ -75,9 +81,9 @@ export const getTodoElement = (todoList, todoObject) => {
     const todo = document.createElement('div');
     todo.classList.add('todo');
 
+
     const checkbox = document.createElement('span');
-    checkbox.classList.add('material-icons', 'grey');
-    checkbox.innerHTML = 'radio_button_unchecked';
+    checkbox.classList.add('material-icons');
     checkbox.id = `checkbox-${todoObject.id}`;
 
     checkbox.addEventListener('click', (event) => {
@@ -89,7 +95,10 @@ export const getTodoElement = (todoList, todoObject) => {
 
         checkbox.innerHTML = (checkbox.innerHTML === 'check_circle')?
                 'radio_button_unchecked' : 'check_circle';
+
+        todoObject.isChecked = (todoObject.isChecked)? false : true;
     });
+
 
     const todoContent = document.createElement('div');
     todoContent.classList.add('todo-content');
@@ -168,13 +177,15 @@ export const getTodoElement = (todoList, todoObject) => {
     // toggle priority, low -> med -> high
     flagIcon.addEventListener('click', (event) => {
         flagIcon.classList.remove(`priority-${todoObject.priority}`)
+
         switch (todoObject.priority) {
             case 'low':    changePriority(todoObject.id, 'medium'); break;
             case 'medium': changePriority(todoObject.id, 'high');   break;
             case 'high':   changePriority(todoObject.id, 'low');    break;
         }
+
         flagIcon.classList.add(`priority-${todoObject.priority}`)
-        console.log(todoList);
+        renderList(todoList);
     });
 
     const deleteIcon = document.createElement('span');
@@ -253,6 +264,19 @@ export const getTodoElement = (todoList, todoObject) => {
 
     todoContainer.appendChild(todo);
     todoContainer.appendChild(todoDetails);
+
+    // set todo checked status
+    // after it has been attached
+    // to DOM to avoid TypeError
+    if (todoObject.isChecked) {
+        checkbox.classList.add('blue');
+        checkbox.parentElement.classList.add('checked');
+        checkbox.parentElement.nextSibling.classList.add('checked');
+        checkbox.innerHTML = 'check_circle';
+    } else {
+        checkbox.classList.add('grey');
+        checkbox.innerHTML = 'radio_button_unchecked';
+    }
 
     return todoContainer;
 }
