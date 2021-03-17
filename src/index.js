@@ -13,7 +13,7 @@ flatpickr('.flatpickr', {
     ],
 });
 
-// initial rendering of list
+// initial rendering of todo list & project list
 dom.renderList(dom.tab.INBOX, todo.projects['Inbox']);
 dom.renderProjectsList(todo.projects);
 
@@ -101,10 +101,6 @@ todoForm.addEventListener('submit', (event) => {
 
     dom.hideTodoModal();
 });
-
-// new project form
-const newProject = document.querySelector('#add-project');
-newProject.addEventListener('click', dom.showProjectModal);
 
 // cancel add project
 const cancelProject = document.querySelector('#project-modal-cancel');
