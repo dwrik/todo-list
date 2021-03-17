@@ -13,11 +13,20 @@ const Todo = (id, title, description, dueDate, priority, isChecked, project) => 
 
 let nextValidID = 3;
 
+// get localstorage projects if any
+const storage = JSON.parse(localStorage.getItem('projects'));
+
 // stores all lists/projects
-export const projects = {};
+export const projects = storage ?? {} ;
 
 // define inbox as non enumerable property of projects
 Object.defineProperty(projects, 'Inbox', { value: [] });
+
+
+// update storage
+const updateStorage = () => {
+    localStorage.setItem('projects', JSON.stringify(projects));
+};
 
 
 // project operations
@@ -25,10 +34,12 @@ Object.defineProperty(projects, 'Inbox', { value: [] });
 export const addProject = (formData) => {
     const project = formData.get('project-name');
     projects[project] = [];
+    updateStorage();
 };
 
 export const deleteProject = (name) => {
     delete projects[name];
+    updateStorage();
 };
 
 
@@ -38,6 +49,7 @@ export const addTodo = (formData) => {
     const todo = parseFormData(formData);
     const projectName = todo.project;
     projects[projectName].push(todo);
+    updateStorage();
 };
 
 export const updateTodo = (formData) => {
@@ -47,10 +59,12 @@ export const updateTodo = (formData) => {
 
     todo.isChecked = projects[projectName][index].isChecked;
     projects[projectName][index] = todo;
+    updateStorage();
 }
 
 export const deleteTodo = (id, projectName) => {
     projects[projectName].splice(getTodoIndex(projects[projectName], id), 1);
+    updateStorage();
 }
 
 // low => med => high
@@ -66,8 +80,16 @@ export const changePriority = (id, projectName) => {
     }
 
     projects[projectName][index].priority = newPriority;
+    updateStorage();
 };
 
+export const toggleChecked = (id, projectName) => {
+    const index = getTodoIndex(projects[projectName], id);
+    const isChecked = projects[projectName][index].isChecked;
+
+    projects[projectName][index].isChecked = (isChecked)? false : true;
+    updateStorage();
+};
 
 // private helpers
 
