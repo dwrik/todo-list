@@ -26,17 +26,22 @@
 .sidebar-item-content {
     padding: 20px;
     display: flex;
+    cursor: pointer;
     font-weight: 600;
     font-size: 1.25em;
     align-items: center;
     justify-content: flex-start;
     color: rgba(31, 31, 31, 1);
     border-radius: 5px;
+    transition: all 50ms;
 }
 
-.sidebar-item-content:hover {
-    cursor: pointer;
+.selected {
     background-color: rgba(181, 181, 181, 0.2);
+}
+
+.sidebar-item-content:active {
+    transform: scale(0.98);
 }
 
 .sidebar-item-content .icon { margin-right: 20px; }
@@ -60,13 +65,18 @@
     cursor: pointer;
     justify-content: space-between;
     align-items: center;
+    transition: all 50ms;
 }
 
-.project:hover { background-color: rgba(181, 181, 181, 0.2); }
+.project:active {
+    transform: scale(0.98);
+}
 
 .project-content { display: flex; align-items: center; }
 
 .project-content .project-icon { margin-right: 20px; }
+
+#add-project .project-content .project-icon { margin-left: 20px; }
 
 .remove-project .remove-icon { display: none; }
 
@@ -247,7 +257,7 @@
     100% { bottom:    0px; opacity: 1; }
 }
 
-.modal-heading { font-size: 1.5em; margin: 10px; }
+.modal-heading { font-size: 1.5em; margin: 10px 5px; }
 
 .modal-input {
     padding: 10px;
@@ -274,11 +284,11 @@
     color: white;
 }
 
-#modal-cancel { background-color: hsl(6, 93%, 71%); }
-#modal-confirm { background-color: hsl(210, 100%, 56%); }
-#modal-cancel:hover { background-color: hsl(6, 93%, 61%); }
-#modal-confirm:hover { background-color: hsl(210, 100%, 46%); }
-#modal-confirm:focus, #modal-cancel:focus { outline: none }
+.modal-cancel { background-color: hsl(6, 93%, 71%); }
+.modal-confirm { background-color: hsl(210, 100%, 56%); }
+.modal-cancel:hover { background-color: hsl(6, 93%, 61%); }
+.modal-confirm:hover { background-color: hsl(210, 100%, 46%); }
+.modal-confirm:focus, .modal-cancel:focus { outline: none }
 
 ::-webkit-scrollbar { width: 5px; }
 
@@ -302,6 +312,7 @@
 .material-icons.md-20 { font-size: 20px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons-outlined.md-14 { font-size: 14px; }
+.material-icons-outlined.md-18 { font-size: 18px; }
 .material-icons-outlined.md-20 { font-size: 20px; }
 .material-icons-outlined.md-24 { font-size: 24px; }
 
