@@ -1,5 +1,4 @@
-import { format, isToday } from 'date-fns';
-import isAfter from 'date-fns/isAfter';
+import { format, isToday, isAfter } from 'date-fns';
 import { projects, changePriority, deleteTodo, deleteProject } from './todo';
 
 // sidebar tabs
@@ -40,8 +39,7 @@ export const renderList = (currTab, todoList) => {
                 isAfter(
                     new Date(todo.dueDate),
                     new Date()
-                ))
-                filteredList.sort((a, b) =>
+                )).sort((a, b) =>
                     new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
             break;
 
@@ -72,71 +70,9 @@ export const renderProjectsList = (projects) => {
         projectsContainer.appendChild(projectElement);
     }
 
+    // attach new project div to dom
     projectsContainer.appendChild(getNewProjectElement());
 }
-
-const getNewProjectElement = () => {
-    const newProject = document.createElement('div');
-    newProject.classList.add('project');
-    newProject.id = 'add-project';
-
-    const projectContent = document.createElement('div');
-    projectContent.classList.add('project-content');
-
-    const projectIcon = document.createElement('span');
-    projectIcon.classList.add('material-icons-outlined', 'md-20', 'project-icon');
-    projectIcon.innerHTML = 'add';
-
-    const projectTitle = document.createElement('p');
-    projectTitle.innerHTML = 'New Project';
-
-    projectContent.appendChild(projectIcon);
-    projectContent.appendChild(projectTitle);
-    newProject.appendChild(projectContent);
-
-    return newProject;
-};
-
-const getProjectElement = (name, todoList) => {
-    const project = document.createElement('div');
-    project.classList.add('project', 'tab');
-
-    const projectContent = document.createElement('div');
-    projectContent.classList.add('project-content');
-
-    const projectIcon = document.createElement('span');
-    projectIcon.classList.add('material-icons-outlined', 'md-24', 'project-icon', 'darkgrey');
-    projectIcon.innerHTML = 'analytics';
-
-    const projectTitle = document.createElement('p');
-    projectTitle.innerHTML = name;
-
-    projectContent.appendChild(projectIcon);
-    projectContent.appendChild(projectTitle);
-
-    const removeProject = document.createElement('div');
-    removeProject.classList.add('remove-project');
-
-    const removeIcon = document.createElement('span');
-    removeIcon.classList.add('material-icons-outlined', 'md-14', 'remove-icon');
-    removeIcon.innerHTML = 'close';
-
-    removeProject.appendChild(removeIcon);
-
-    project.appendChild(projectContent);
-    project.appendChild(removeProject);
-
-    project.addEventListener('click', (event) => {
-        showTab(name, todoList);
-    });
-
-    removeProject.addEventListener('click', (event) => {
-        deleteProject(name);
-        renderProjectsList(projects);
-    });
-
-    return project;
-};
 
 // update project header and renders todo list
 export const showTab = (tab, todoList) => {
@@ -230,7 +166,74 @@ export const showProjectModal = () => {
     modal.style.display = 'flex';
 };
 
-// private helper for creating todo dom element
+
+// private helpers
+
+const getNewProjectElement = () => {
+    const newProject = document.createElement('div');
+    newProject.classList.add('project');
+    newProject.id = 'add-project';
+
+    const projectContent = document.createElement('div');
+    projectContent.classList.add('project-content');
+
+    const projectIcon = document.createElement('span');
+    projectIcon.classList.add('material-icons-outlined', 'md-20', 'project-icon');
+    projectIcon.innerHTML = 'add';
+
+    const projectTitle = document.createElement('p');
+    projectTitle.innerHTML = 'New Project';
+
+    projectContent.appendChild(projectIcon);
+    projectContent.appendChild(projectTitle);
+    newProject.appendChild(projectContent);
+
+    newProject.addEventListener('click', showProjectModal);
+
+    return newProject;
+};
+
+const getProjectElement = (name, todoList) => {
+    const project = document.createElement('div');
+    project.classList.add('project', 'tab');
+
+    const projectContent = document.createElement('div');
+    projectContent.classList.add('project-content');
+
+    const projectIcon = document.createElement('span');
+    projectIcon.classList.add('material-icons-outlined', 'md-24', 'project-icon', 'darkgrey');
+    projectIcon.innerHTML = 'analytics';
+
+    const projectTitle = document.createElement('p');
+    projectTitle.innerHTML = name;
+
+    projectContent.appendChild(projectIcon);
+    projectContent.appendChild(projectTitle);
+
+    const removeProject = document.createElement('div');
+    removeProject.classList.add('remove-project');
+
+    const removeIcon = document.createElement('span');
+    removeIcon.classList.add('material-icons-outlined', 'md-14', 'remove-icon');
+    removeIcon.innerHTML = 'close';
+
+    removeProject.appendChild(removeIcon);
+
+    project.appendChild(projectContent);
+    project.appendChild(removeProject);
+
+    project.addEventListener('click', (event) => {
+        showTab(name, todoList);
+    });
+
+    removeProject.addEventListener('click', (event) => {
+        deleteProject(name);
+        renderProjectsList(projects);
+    });
+
+    return project;
+};
+
 const getTodoElement = (todoList, todoObject) => {
 
     // todo container : todo + todo details
