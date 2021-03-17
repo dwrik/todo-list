@@ -28,7 +28,7 @@ tabs.forEach(tab => tab.addEventListener('click', (event) => {
 // inbox tab
 const inboxTab = document.querySelector('#inbox-tab');
 inboxTab.addEventListener('click', (event) => {
-    dom.showTab(dom.tab.INBOX, todo.todoList)
+    dom.showTab(dom.tab.INBOX, todo.projects['Inbox']);
 });
 
 // today tab
