@@ -1,6 +1,6 @@
 import { format, isToday } from 'date-fns';
 import isAfter from 'date-fns/isAfter';
-import { changePriority, deleteTodo } from './todo';
+import { projects, changePriority, deleteTodo, deleteProject } from './todo';
 
 // sidebar tabs
 export const tab = {
@@ -8,6 +8,7 @@ export const tab = {
     TODAY: 'Today',
     UPCOMING: 'Upcoming',
     CURRENT: 'Inbox',
+    PROJECTS: projects,
 };
 
 // renders todo list based on selected sidebar tab
@@ -43,6 +44,12 @@ export const renderList = (currTab, todoList) => {
                 filteredList.sort((a, b) =>
                     new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
             break;
+
+        // custom projects
+        default:
+            tab.CURRENT = Object.keys(projects).find((name) => name === currTab);
+            filteredList = projects[tab.CURRENT];
+            break;
     }
 
     // add filtered list elements to DOM
@@ -51,6 +58,84 @@ export const renderList = (currTab, todoList) => {
         projectTodos.appendChild(todoElement);
     }
 
+};
+
+export const renderProjectsList = (projects) => {
+    const projectsContainer = document.querySelector('.projects');
+
+    // remove existing list elements
+    const allProjects = [ ...document.querySelectorAll('.project') ];
+    allProjects.forEach(project => projectsContainer.removeChild(project));
+
+    for (let name in projects) {
+        const projectElement = getProjectElement(name, projects[name]);
+        projectsContainer.appendChild(projectElement);
+    }
+
+    projectsContainer.appendChild(getNewProjectElement());
+}
+
+const getNewProjectElement = () => {
+    const newProject = document.createElement('div');
+    newProject.classList.add('project');
+    newProject.id = 'add-project';
+
+    const projectContent = document.createElement('div');
+    projectContent.classList.add('project-content');
+
+    const projectIcon = document.createElement('span');
+    projectIcon.classList.add('material-icons-outlined', 'md-20', 'project-icon');
+    projectIcon.innerHTML = 'add';
+
+    const projectTitle = document.createElement('p');
+    projectTitle.innerHTML = 'New Project';
+
+    projectContent.appendChild(projectIcon);
+    projectContent.appendChild(projectTitle);
+    newProject.appendChild(projectContent);
+
+    return newProject;
+};
+
+const getProjectElement = (name, todoList) => {
+    const project = document.createElement('div');
+    project.classList.add('project', 'tab');
+
+    const projectContent = document.createElement('div');
+    projectContent.classList.add('project-content');
+
+    const projectIcon = document.createElement('span');
+    projectIcon.classList.add('material-icons-outlined', 'md-24', 'project-icon', 'darkgrey');
+    projectIcon.innerHTML = 'analytics';
+
+    const projectTitle = document.createElement('p');
+    projectTitle.innerHTML = name;
+
+    projectContent.appendChild(projectIcon);
+    projectContent.appendChild(projectTitle);
+
+    const removeProject = document.createElement('div');
+    removeProject.classList.add('remove-project');
+
+    const removeIcon = document.createElement('span');
+    removeIcon.classList.add('material-icons-outlined', 'md-14', 'remove-icon');
+    removeIcon.innerHTML = 'close';
+
+    removeProject.appendChild(removeIcon);
+
+    project.appendChild(projectContent);
+    project.appendChild(removeProject);
+
+    project.addEventListener('click', (event) => {
+        showTab(name, todoList);
+    });
+
+    removeProject.addEventListener('click', (event) => {
+        deleteProject(name);
+        renderProjectsList(projects);
+    });
+
+    return project;
 };
 
 // update project header and renders todo list
@@ -97,8 +182,8 @@ export const toggleProjects = () => {
 }
 
 // hides modal and resets form
-export const hideModal = () => {
-    const modal = document.querySelector('.modal');
+export const hideTodoModal = () => {
+    const modal = document.querySelector('.modal#todo-modal');
     modal.style.display = 'none';
 
     const id = document.querySelector('input[name="id"]');
@@ -113,14 +198,35 @@ export const hideModal = () => {
     const datePicker = document.querySelector('.flatpickr.modal-input')._flatpickr;
     datePicker.clear();
     
-    const modalHeading = document.querySelector('.modal-heading');
+    const modalHeading = modal.querySelector('.modal-heading');
     modalHeading.innerHTML = 'Add Todo';
 };
 
+export const hideProjectModal = () => {
+    const modal = document.querySelector('.modal#project-modal');
+    modal.style.display = 'none';
 
-// view modal
-export const showModal = () => {
-    const modal = document.querySelector('.modal');
+    const projectForm = document.querySelector('#project-form');
+    projectForm.reset();
+}
+
+
+// todo modal
+export const showTodoModal = () => {
+    const modal = document.querySelector('.modal#todo-modal');
+    modal.style.display = 'flex';
+
+    // setting default project value
+    const project = document.querySelector('#todo-form [name="project"]');
+    project.value = (tab.CURRENT === tab.UPCOMING || tab.CURRENT === tab.TODAY)?
+                        tab.INBOX : tab.CURRENT;
+
+    console.log(project.value);
+};
+
+// project modal
+export const showProjectModal = () => {
+    const modal = document.querySelector(`.modal#project-modal`);
     modal.style.display = 'flex';
 };
 
@@ -282,9 +388,9 @@ const getTodoElement = (todoList, todoObject) => {
 
     // edit todo
     editIcon.addEventListener('click', (event) => {
-        showModal();
+        showTodoModal();
 
-        const modalHeading = document.querySelector('.modal-heading');
+        const modalHeading = document.querySelector('.modal#todo-modal .modal-heading');
         modalHeading.innerHTML = 'Edit Todo';
 
         const operation = document.querySelector('#operation');
@@ -292,6 +398,9 @@ const getTodoElement = (todoList, todoObject) => {
 
         const id = document.querySelector('input[name="id"]');
         id.value = todoObject.id;
+
+        const project = document.querySelector('#todo-form [name="project"]');
+        project.value = todoObject.project;
 
         const title= document.querySelector('.modal-input[name="title"]');
         title.value = todoObject.title;
@@ -309,14 +418,14 @@ const getTodoElement = (todoList, todoObject) => {
     // change priority
     flagIcon.addEventListener('click', (event) => {
         flagIcon.classList.remove(`priority-${todoObject.priority}`)
-        changePriority(todoObject.id);
+        changePriority(todoObject.id, todoObject.project);
         flagIcon.classList.add(`priority-${todoObject.priority}`)
         renderList(tab.CURRENT, todoList);
     });
 
     // delete todo
     deleteIcon.addEventListener('click', (event) => {
-        deleteTodo(todoObject.id);
+        deleteTodo(todoObject.id, todoObject.project);
         renderList(tab.CURRENT, todoList);
     });
 
