@@ -1,5 +1,5 @@
 import { format, isToday, isAfter } from 'date-fns';
-import { projects, changePriority, deleteTodo, deleteProject } from './todo';
+import { projects, changePriority, toggleChecked, deleteTodo, deleteProject } from './todo';
 
 // sidebar tabs
 export const tab = {
@@ -386,7 +386,7 @@ const getTodoElement = (todoList, todoObject) => {
         checkbox.innerHTML = (checkbox.innerHTML === 'check_circle')?
                 'radio_button_unchecked' : 'check_circle';
 
-        todoObject.isChecked = (todoObject.isChecked)? false : true;
+        toggleChecked(todoObject.id, todoObject.project);
     });
 
     // edit todo
