@@ -18,7 +18,7 @@
                     <div class="close-sidebar">
                         <span class="material-icons-outlined md-24 darkgrey" id="close-button">close</span>
                     </div>
-                    <div class="sidebar-item-content" id="inbox-tab">
+                    <div class="sidebar-item-content tab selected" id="inbox-tab">
                         <div class="icon">
                             <span class="material-icons-outlined md-24 lightblue">inbox</span>
                         </div>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="sidebar-item">
-                    <div class="sidebar-item-content" id="today-tab">
+                    <div class="sidebar-item-content tab" id="today-tab">
                         <div class="icon">
                             <span class="material-icons-outlined md-24 green">today</span>
                         </div>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="sidebar-item">
-                    <div class="sidebar-item-content" id="upcoming-tab">
+                    <div class="sidebar-item-content tab" id="upcoming-tab">
                         <div class="icon">
                             <span class="material-icons-outlined md-24 yellow">upcoming</span>
                         </div>
@@ -54,19 +54,7 @@
                 </div>
             </div>
             <div class="sidebar-variable-items">
-                <div class="sidebar-item projects">
-
-                    <div class="project" id="project-1">
-                        <div class="project-content">
-                            <span class="material-icons-outlined md-20 project-icon">checklist</span>
-                            <p>Custom project</p>
-                        </div>
-                        <div class="remove-project">
-                            <span class="material-icons-outlined md-14 remove-icon">close</span>
-                        </div>
-                    </div>
-
-                </div>
+                <div class="sidebar-item projects"></div>
                 <div class="footer">
                     <h1 class="logo">
                         To-Do
@@ -87,13 +75,14 @@
         <div class="add-button">
             <span class="material-icons-outlined md-20">add</span>
         </div>
-        <div class="modal">
+        <div class="modal" id="todo-modal">
             <div class="modal-body">
                 <div class="modal-heading">Add Todo</div>
-                <!-- FORM -->
+                <!-- form -->
                 <form id="todo-form">
                     <input type="hidden" name="id" value="">
                     <input type="hidden" id="operation" value="add">
+                    <input type="hidden" name="project" value="">
                     <input type="text" name="title" placeholder="Title" class="modal-input" required>
                     <textarea name="description" rows="6" wrap="hard" placeholder="Description" class="modal-input"></textarea>
                     <input type="text" name="date" placeholder="Due Date" class="flatpickr modal-input">
@@ -104,10 +93,22 @@
                         <option value="high"> High</option>
                     </select>
                 </form>
-                <!-- BUTTONS -->
+                <!-- buttons -->
                 <div class="modal-buttons">
-                    <button class="buttons" id="modal-confirm" type="submit" form="todo-form">SAVE</button>
-                    <button class="buttons" id="modal-cancel">CANCEL</button>
+                    <button class="buttons modal-confirm" id="todo-modal-confirm" type="submit" form="todo-form">SAVE</button>
+                    <button class="buttons modal-cancel" id="todo-modal-cancel">CANCEL</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="project-modal">
+            <div class="modal-body">
+                <div class="modal-heading">New Project</div>
+                <form id="project-form">
+                    <input type="text" name="project-name" placeholder="Project Name" class="modal-input" required>
+                </form>
+                <div class="modal-buttons">
+                    <button class="buttons modal-confirm" id="project-modal-confirm" type="submit" form="project-form">SAVE</button>
+                    <button class="buttons modal-cancel" id="project-modal-cancel">CANCEL</button>
                 </div>
             </div>
         </div>
