@@ -156,14 +156,29 @@ export const showTodoModal = () => {
     const project = document.querySelector('#todo-form [name="project"]');
     project.value = (tab.CURRENT === tab.UPCOMING || tab.CURRENT === tab.TODAY)?
                         tab.INBOX : tab.CURRENT;
-
-    console.log(project.value);
 };
 
 // project modal
 export const showProjectModal = () => {
     const modal = document.querySelector(`.modal#project-modal`);
     modal.style.display = 'flex';
+};
+
+export const renderInvalidProject = (status) => {
+    const input = document.querySelector('#project-form [name="project-name"]');
+    const invalidText = document.querySelector('.project-exists-text');
+
+    switch(status) {
+        case 'valid':
+            input.classList.remove('project-exists');
+            invalidText.style.display = 'none';
+            break;
+
+        case 'invalid':
+            input.classList.add('project-exists');
+            invalidText.style.display = 'block';
+            break;
+    }
 };
 
 
