@@ -16,14 +16,7 @@ flatpickr('.flatpickr', {
 // initial rendering of todo list & project list
 dom.renderList(dom.tab.INBOX, todo.projects['Inbox']);
 dom.renderProjectsList(todo.projects);
-
-const tabs = [ ...document.querySelectorAll('.tab') ];
-tabs.forEach(tab => tab.addEventListener('click', (event) => {
-    tabs.forEach(t => t.classList.remove('selected'));
-    if (tab === event.target) {
-        tab.classList.add('selected');
-    }
-}));
+dom.refreshTabListeners();
 
 // inbox tab
 const inboxTab = document.querySelector('#inbox-tab');
