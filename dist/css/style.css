@@ -277,6 +277,9 @@
     color: white;
 }
 
+.project-exists { border-color: hsl(6, 93%, 61%); }
+.project-exists-text { display: none; color: hsl(6, 93%, 61%);}
+
 .modal-cancel { background-color: hsl(6, 93%, 71%); }
 .modal-confirm { background-color: hsl(210, 100%, 56%); }
 .modal-cancel:hover { background-color: hsl(6, 93%, 61%); }
