@@ -33,8 +33,12 @@ const updateStorage = () => {
 
 export const addProject = (formData) => {
     const project = formData.get('project-name');
+    if (projects[project]) {
+        return false;
+    }
     projects[project] = [];
     updateStorage();
+    return true;
 };
 
 export const deleteProject = (name) => {
