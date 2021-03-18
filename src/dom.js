@@ -72,6 +72,9 @@ export const renderProjectsList = (projects) => {
 
     // attach new project div to dom
     projectsContainer.appendChild(getNewProjectElement());
+
+    // for selection bg
+    refreshTabListeners();
 }
 
 // update project header and renders todo list
@@ -144,6 +147,8 @@ export const hideProjectModal = () => {
 
     const projectForm = document.querySelector('#project-form');
     projectForm.reset();
+
+    renderInvalidProject('valid');
 }
 
 
@@ -247,6 +252,16 @@ const getProjectElement = (name, todoList) => {
     });
 
     return project;
+};
+
+export const refreshTabListeners = () => {
+    const tabs = [ ...document.querySelectorAll('.tab') ];
+    tabs.forEach(tab => tab.addEventListener('click', (event) => {
+        tabs.forEach(t => t.classList.remove('selected'));
+        if (tab === event.target) {
+            tab.classList.add('selected');
+        }
+    }));
 };
 
 const getTodoElement = (todoList, todoObject) => {
