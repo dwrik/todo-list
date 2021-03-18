@@ -38,9 +38,11 @@
 
 .selected { background-color: rgba(181, 181, 181, 0.2); }
 
+.sidebar-item-content p { pointer-events: none; }
+
 .sidebar-item-content:active { transform: scale(0.98); }
 
-.sidebar-item-content .icon { margin-right: 20px; }
+.sidebar-item-content .icon { pointer-events: none; margin-right: 20px; }
 
 .sidebar-item.projects {
     max-height: 0;
