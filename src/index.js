@@ -111,9 +111,14 @@ const projectForm = document.querySelector('#project-form');
 projectForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const formData = new FormData(projectForm);
-    todo.addProject(formData);
-    dom.renderProjectsList(todo.projects);
-    dom.hideProjectModal();
+    const addSuccessful = todo.addProject(formData);
+    if (!addSuccessful) {
+        dom.renderInvalidProject('invalid');
+    } else {
+        dom.renderInvalidProject('valid');
+        dom.renderProjectsList(todo.projects);
+        dom.hideProjectModal();
+    }
 });
 
 // hide modals on click
