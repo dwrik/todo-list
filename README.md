@@ -1,4 +1,4 @@
-# To-do
+# ToDo
 
 A minimalist *todo list*.
 
